@@ -1,0 +1,173 @@
+<svg viewBox="-300 -50 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+    </pattern>
+    <linearGradient id="robotGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90d9"/>
+      <stop offset="100%" style="stop-color:#2c5aa0"/>
+    </linearGradient>
+    <linearGradient id="rackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b"/>
+      <stop offset="100%" style="stop-color:#c92a2a"/>
+    </linearGradient>
+    <linearGradient id="conveyorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffa94d"/>
+      <stop offset="100%" style="stop-color:#e67700"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="150" y="-10" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">FANUC M710iC/50H Workcell - Top-Down View (XY Plane)</text>
+  
+  <!-- Background grid -->
+  <rect x="-250" y="0" width="800" height="600" fill="url(#grid)"/>
+  <rect x="-250" y="0" width="800" height="600" fill="none" stroke="#999" stroke-width="2"/>
+  
+  <!-- Axes -->
+  <line x1="-250" y1="300" x2="530" y2="300" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="150" y1="580" x2="150" y2="20" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="540" y="305" font-family="Arial" font-size="16" fill="#333">+X (m)</text>
+  <text x="155" y="15" font-family="Arial" font-size="16" fill="#333">+Y (m)</text>
+  
+  <!-- Scale markers (100px = 1m) -->
+  <g font-family="Arial" font-size="12" fill="#666">
+    <line x1="50" y1="295" x2="50" y2="305" stroke="#666" stroke-width="1"/>
+    <text x="50" y="320" text-anchor="middle">-1</text>
+    <line x1="250" y1="295" x2="250" y2="305" stroke="#666" stroke-width="1"/>
+    <text x="250" y="320" text-anchor="middle">1</text>
+    <line x1="350" y1="295" x2="350" y2="305" stroke="#666" stroke-width="1"/>
+    <text x="350" y="320" text-anchor="middle">2</text>
+    <line x1="450" y1="295" x2="450" y2="305" stroke="#666" stroke-width="1"/>
+    <text x="450" y="320" text-anchor="middle">3</text>
+    
+    <line x1="145" y1="200" x2="155" y2="200" stroke="#666" stroke-width="1"/>
+    <text x="135" y="205" text-anchor="end">1</text>
+    <line x1="145" y1="400" x2="155" y2="400" stroke="#666" stroke-width="1"/>
+    <text x="135" y="405" text-anchor="end">-1</text>
+    <line x1="145" y1="500" x2="155" y2="500" stroke="#666" stroke-width="1"/>
+    <text x="135" y="505" text-anchor="end">-2</text>
+  </g>
+  
+  <!-- Robot Pedestal (cylinder, r=0.425m = 42.5px at 100px/m) -->
+  <circle cx="150" cy="300" r="42.5" fill="url(#robotGrad)" stroke="#1a4480" stroke-width="3" opacity="0.9"/>
+  <text x="150" y="305" font-family="Arial" font-size="10" text-anchor="middle" fill="white" font-weight="bold">ROBOT</text>
+  <text x="150" y="317" font-family="Arial" font-size="8" text-anchor="middle" fill="white">Pedestal</text>
+  
+  <!-- Robot arm at start configuration (approximated) -->
+  <!-- Start: joints = [0, 0.927, -0.642, 0, 0, 0] -->
+  <!-- Link positions calculated from FK -->
+  <g stroke="#2c5aa0" stroke-width="8" stroke-linecap="round" opacity="0.8">
+    <!-- Base to J2 -->
+    <line x1="150" y1="300" x2="165" y2="300"/>
+    <!-- J2 to J3 (lower arm, ~0.87m) -->
+    <line x1="165" y1="300" x2="235" y2="290"/>
+    <!-- J3 to Wrist (~0.97m) -->
+    <line x1="235" y1="290" x2="315" y2="285"/>
+    <!-- Wrist to EE -->
+    <line x1="315" y1="285" x2="335" y2="283"/>
+  </g>
+  <!-- Joint markers -->
+  <circle cx="150" cy="300" r="6" fill="#ffd43b" stroke="#fab005" stroke-width="2"/>
+  <circle cx="165" cy="300" r="5" fill="#ffd43b" stroke="#fab005" stroke-width="2"/>
+  <circle cx="235" cy="290" r="5" fill="#ffd43b" stroke="#fab005" stroke-width="2"/>
+  <circle cx="315" cy="285" r="5" fill="#ffd43b" stroke="#fab005" stroke-width="2"/>
+  <!-- End-effector -->
+  <circle cx="335" cy="283" r="8" fill="#51cf66" stroke="#2f9e44" stroke-width="2"/>
+  <text x="345" y="278" font-family="Arial" font-size="10" fill="#2f9e44" font-weight="bold">START</text>
+  
+  <!-- UPS Conveyor Frame (box 0.2 x 1.0 at x=2.02, y=0) -->
+  <!-- In pixels: x=150+202=352, y=300-0=300, w=20, h=100 -->
+  <rect x="342" y="250" width="20" height="100" fill="url(#conveyorGrad)" stroke="#c92a2a" stroke-width="2" opacity="0.8"/>
+  <text x="352" y="230" font-family="Arial" font-size="9" text-anchor="middle" fill="#c92a2a">UPS Conv</text>
+  <text x="352" y="242" font-family="Arial" font-size="9" text-anchor="middle" fill="#c92a2a">Frame</text>
+  
+  <!-- UPS Conveyor Items (box 1.9 x 0.74 at x=2.8, y=0) -->
+  <!-- In pixels: x=150+280=430, y=300, w=190, h=74 -->
+  <rect x="335" y="263" width="190" height="74" fill="url(#conveyorGrad)" stroke="#e67700" stroke-width="2" opacity="0.6"/>
+  <text x="430" y="305" font-family="Arial" font-size="10" text-anchor="middle" fill="#c92a2a">Conveyor Items</text>
+  
+  <!-- Rack 01 at (1.95, -0.45) rotated -18° -->
+  <!-- In pixels: x=150+195=345, y=300+45=345 -->
+  <g transform="translate(345, 345) rotate(18)">
+    <rect x="-20" y="-12.5" width="40" height="25" fill="url(#rackGrad)" stroke="#a61e1e" stroke-width="2" opacity="0.8"/>
+    <text x="0" y="4" font-family="Arial" font-size="8" text-anchor="middle" fill="white" font-weight="bold">R01</text>
+  </g>
+  
+  <!-- Rack 02/03 at (1.148, -1.35) rotated -54° -->
+  <!-- In pixels: x=150+114.8=265, y=300+135=435 -->
+  <g transform="translate(265, 435) rotate(54)">
+    <rect x="-50" y="-20" width="100" height="40" fill="url(#rackGrad)" stroke="#a61e1e" stroke-width="2" opacity="0.8"/>
+    <text x="0" y="5" font-family="Arial" font-size="9" text-anchor="middle" fill="white" font-weight="bold">R02/03</text>
+  </g>
+  
+  <!-- Rack 04/05 at (0.0, -1.73) rotated -90° -->
+  <!-- In pixels: x=150, y=300+173=473 -->
+  <g transform="translate(150, 473) rotate(90)">
+    <rect x="-50" y="-20" width="100" height="40" fill="url(#rackGrad)" stroke="#a61e1e" stroke-width="2" opacity="0.8"/>
+    <text x="0" y="5" font-family="Arial" font-size="9" text-anchor="middle" fill="white" font-weight="bold">R04/05</text>
+  </g>
+  
+  <!-- Rack 06/07 at (-1.148, -1.35) rotated -126° -->
+  <!-- In pixels: x=150-114.8=35, y=300+135=435 -->
+  <g transform="translate(35, 435) rotate(126)">
+    <rect x="-50" y="-20" width="100" height="40" fill="url(#rackGrad)" stroke="#a61e1e" stroke-width="2" opacity="0.8"/>
+    <text x="0" y="5" font-family="Arial" font-size="9" text-anchor="middle" fill="white" font-weight="bold">R06/07</text>
+  </g>
+  
+  <!-- Rack 08 at (-1.68, -0.912) rotated 198° -->
+  <!-- In pixels: x=150-168=-18, y=300+91.2=391 -->
+  <g transform="translate(-18, 391) rotate(-18)">
+    <rect x="-25" y="-15" width="50" height="30" fill="url(#rackGrad)" stroke="#a61e1e" stroke-width="2" opacity="0.8"/>
+    <text x="0" y="5" font-family="Arial" font-size="8" text-anchor="middle" fill="white" font-weight="bold">R08</text>
+  </g>
+  
+  <!-- Robot workspace circle (approximate reach ~2m) -->
+  <circle cx="150" cy="300" r="200" fill="none" stroke="#4a90d9" stroke-width="2" stroke-dasharray="10,5" opacity="0.5"/>
+  <text x="150" y="115" font-family="Arial" font-size="10" text-anchor="middle" fill="#4a90d9">Robot Reach (~2m)</text>
+  
+  <!-- Goal position marker -->
+  <circle cx="336" cy="300" r="10" fill="none" stroke="#e03131" stroke-width="3"/>
+  <line x1="326" y1="300" x2="346" y2="300" stroke="#e03131" stroke-width="2"/>
+  <line x1="336" y1="290" x2="336" y2="310" stroke="#e03131" stroke-width="2"/>
+  <text x="336" y="275" font-family="Arial" font-size="10" text-anchor="middle" fill="#e03131" font-weight="bold">GOAL</text>
+  <text x="336" y="330" font-family="Arial" font-size="8" text-anchor="middle" fill="#e03131">(1.86, 0, 1.0)</text>
+  
+  <!-- Legend -->
+  <g transform="translate(-240, 20)">
+    <rect x="0" y="0" width="160" height="145" fill="white" stroke="#ccc" stroke-width="1" rx="5"/>
+    <text x="80" y="20" font-family="Arial" font-size="12" text-anchor="middle" font-weight="bold" fill="#333">Legend</text>
+    
+    <circle cx="20" cy="40" r="8" fill="url(#robotGrad)"/>
+    <text x="35" y="44" font-family="Arial" font-size="10" fill="#333">Robot Pedestal</text>
+    
+    <rect x="12" y="55" width="16" height="12" fill="url(#rackGrad)"/>
+    <text x="35" y="65" font-family="Arial" font-size="10" fill="#333">Storage Racks</text>
+    
+    <rect x="12" y="75" width="16" height="12" fill="url(#conveyorGrad)"/>
+    <text x="35" y="85" font-family="Arial" font-size="10" fill="#333">Conveyor</text>
+    
+    <line x1="12" y1="100" x2="28" y2="100" stroke="#2c5aa0" stroke-width="6"/>
+    <text x="35" y="104" font-family="Arial" font-size="10" fill="#333">Robot Arm</text>
+    
+    <circle cx="20" cy="118" r="6" fill="#51cf66" stroke="#2f9e44" stroke-width="2"/>
+    <text x="35" y="122" font-family="Arial" font-size="10" fill="#333">End-Effector</text>
+    
+    <circle cx="20" cy="135" r="6" fill="none" stroke="#e03131" stroke-width="2"/>
+    <text x="35" y="139" font-family="Arial" font-size="10" fill="#333">Goal Position</text>
+  </g>
+  
+  <!-- Scale bar -->
+  <g transform="translate(400, 560)">
+    <line x1="0" y1="0" x2="100" y2="0" stroke="#333" stroke-width="2"/>
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#333" stroke-width="2"/>
+    <line x1="100" y1="-5" x2="100" y2="5" stroke="#333" stroke-width="2"/>
+    <text x="50" y="20" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">1 meter</text>
+  </g>
+  
+  <!-- Notes -->
+  <text x="-240" y="590" font-family="Arial" font-size="10" fill="#666">* Coordinate system: X+ right, Y+ up (into page in side view)</text>
+</svg>
