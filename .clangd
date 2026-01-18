@@ -1,0 +1,6 @@
+CompileFlags:
+  CompilationDatabase: build/
+  Add:
+    - -I/home/bot/sorting_app_ws/src/deps/3rd_party_lib/ompl/src
+    - -I/usr/include/eigen3
+    - -std=c++17
